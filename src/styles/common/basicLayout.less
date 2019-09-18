@@ -1,0 +1,109 @@
+.ant-layout {
+    min-width: 1200px;
+}
+.layout-sider {
+    position: relative;
+    // 缩小侧边栏
+    &.ant-layout-sider-collapsed {
+        // height: 64px;
+        .logo-wrap,
+        .ant-menu {
+            display: none;
+        }
+    }
+
+    .ant-menu.ant-menu-dark .ant-menu-item-selected {
+        background-color: #2b333d;
+        border-left: 3px solid #3b96f3;
+    }
+}
+.logo-wrap {
+    padding: 28px 6px 10px;
+    border-bottom: 1px solid #29313c;
+    //   background-color: #002140;
+    overflow: hidden;
+    text-align: center;
+    .logo-img {
+        // height: 78px;
+    }
+    // 侧边栏正常样式
+    .sitename-wrap {
+        margin-top: 2px;
+
+        .sitename,
+        .subname {
+            margin-bottom: 0;
+            font-weight: normal;
+            color: #fff;
+        }
+        .sitename {
+            font-size: 20px;
+        }
+        .subname {
+            max-width: 130px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+    }
+}
+.btn-group {
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+.btn-trigger {
+    display: block;
+    width: 15px;
+    height: 11px;
+    background-color: @placeholder;
+    background: url('@{img}/icon/icon-btn-trigger.png');
+    background-size: 100%;
+    cursor: pointer;
+}
+.btn-switch {
+    height: 20px;
+    margin-top: 20px;
+    font-size: 12px;
+}
+// .ant-layout-sider-collapsed {
+
+// }
+
+.layout-header {
+    position: relative;
+
+    .menu-list {
+        float: left;
+        border: 0;
+    }
+    .menu-list-item {
+        font-size: 16px;
+        line-height: 62px;
+    }
+    .toolbar {
+        float: right;
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+    .notification {
+        margin: 0 16px;
+    }
+    .userinfo {
+        margin-right: 16px;
+    }
+    .user-name {
+        font-size: 14px;
+        margin-left: 14px;
+    }
+}
+
+.layout-content {
+    min-width: 1100px;
+    .scrollbar();
+}
+
+.ant-tree li .ant-tree-node-content-wrapper.ant-tree-node-selected {
+    background-color: transparent;
+    color: #1890ff;
+}

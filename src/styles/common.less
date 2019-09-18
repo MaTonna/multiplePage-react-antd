@@ -1,0 +1,115 @@
+@charset "UTF-8";
+@import 'config'; // 变量
+@import 'mixins';
+@import './common/table';
+@import './common/basicLayout'; // 页面模板
+
+//公共样式
+
+// body {
+//   font-family: 'Helvetica Neue,Helvetica,Microsoft Yahei,PingFang SC,Hiragino Sans GB,WenQuanYi Micro Hei,sans-serif';
+//   color: #333;
+//   background-color: #e6e6e6;
+// }
+ul,
+li,
+ol,
+dl,
+dd,
+dt {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+// 清除浮动
+.clearfix {
+    .clearfix();
+}
+
+/*设置单行文字如果超出用省略号表示*/
+.ellipsis {
+    .ellipsis();
+}
+
+//内容的样式
+.main-content {
+    min-width: 1000px;
+    padding: 15px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    background-color: #fff;
+}
+
+// 内容区域基本样式结构
+@labelWidth: 100px;
+@inputWidth: 120px; // 全局的输入框的宽度
+
+.content-header,
+.content-main,
+.content-footer {
+    min-width: 1000px;
+    background-color: #fff;
+}
+
+// 查询部分
+.content-header {
+    padding: 25px;
+    margin-bottom: 16px;
+    .button-group {
+        margin-left: @labelWidth;
+    }
+    .ant-form-item-control-wrapper {
+        min-width: @inputWidth;
+    }
+    .ant-form-item-label {
+        text-align: right;
+    }
+    .ant-form-item {
+        min-width: 280px;
+    }
+}
+
+// table样式
+.content-main {
+    padding: 10px 15px;
+    min-height: 400px;
+    a {
+        text-decoration: none;
+    }
+    // 表格内文字居中
+    .table-center {
+        th,
+        td {
+            text-align: center;
+        }
+    }
+
+    // 表格的分页器
+    .ant-table-pagination {
+        margin-right: 30px;
+    }
+
+    .ant-table-row {
+        &:nth-child(2n + 2) {
+            background-color: #fafafa;
+        }
+    }
+}
+
+.content-footer {
+    padding: 8px 16px;
+    margin-top: 8px;
+}
+
+.ant-breadcrumb {
+    margin: 10px 10px 0;
+}
+
+.hide {
+    display: none !important;
+}
+
+.ml {
+    margin-left: 10px;
+}

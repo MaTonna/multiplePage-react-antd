@@ -1,0 +1,8 @@
+{
+  "printWidth": 120,
+  "Semicolons": true,
+  "singleQuote": true,
+  "arrowParens": "always",
+  "trailingComma": "es5",
+  "JSX Bracket": true
+}

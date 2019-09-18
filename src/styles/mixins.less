@@ -1,0 +1,57 @@
+//
+// Mixins
+// --------------------------------------------------
+.scrollbar(@thumbColor: rgba(0, 0, 0, .2)) {
+  &::-webkit-scrollbar {
+    /*滚动条整体样式*/
+    width: 10px;
+    /*高宽分别对应横竖滚动条的尺寸*/
+    height: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    /*滚动条里面小方块*/
+    // border-radius: 10px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0, 0, 0, .1), inset 0 -1px 0 rgba(0, 0, 0, .07);
+    background-clip: padding-box;
+    min-height: 28px;
+    background: @thumbColor;
+    // &:hover {
+    //   background-color: #84858C;
+    // }
+  }
+  &::-webkit-scrollbar-track {
+    /*滚动条里面轨道*/
+    // border-radius: 10px;
+    // background-color: #EDEDED;
+    background-color: #DCDEE9;
+    // &:hover {
+    //   background-color: #DCDEE9;
+    // }
+  }
+  ::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+  }
+}
+
+.clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.scrollbar-hide {
+  &::-webkit-scrollbar {display:none}
+}
+
+.ellipsis() {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  /*超出的设置为省略号*/
+}
