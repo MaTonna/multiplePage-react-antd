@@ -1,3 +1,6 @@
+interface Window extends Window {
+  T: any
+}
 declare namespace CONFIG {
   const frontPath: string;
   const resourcePath: string;
