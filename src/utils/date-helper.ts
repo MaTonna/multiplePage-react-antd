@@ -1,12 +1,8 @@
-// import tool from './tool';
-
-// const TIME_DAY = 24 * 60 * 60 * 1000;
-
 /**
- * @description 返回服务器现在的时候
- * @returns
+ * 返回服务器现在的时候
+ * @returns {Date} 返回当前时间
  */
-const getNow = () => {
+const getNow = (): Date => {
   let date = new Date();
   if (CONFIG['timeDiff']) {
     date.setTime(date.valueOf() - CONFIG['timeDiff']);
@@ -15,15 +11,12 @@ const getNow = () => {
 };
 
 /**
- * 把 yyyy-mm-dd hh:mm:ss
- * yyyy-mm-dd
- * yyyy/mm/dd
- * 转成 Date 格式
- * @param {String} v 日期字符
- * @returns {Date} 时间
+ * 字符串转成 Date 格式
+ * @param {String} dataString 日期字符
+ * @returns {Date} 返回Date类型的时间
  */
-const toDate = (v) => {
-  return v ? new Date(Date.parse(v.replace(/-/g, '/'))) : null;
+const toDate = (dataString: string): Date | null => {
+  return dataString ? new Date(Date.parse(dataString.replace(/-/g, '/'))) : null;
 };
 
 /**
@@ -33,7 +26,7 @@ const toDate = (v) => {
  * @param {String} _format 格式 默认为 "yyyy-MM-dd hh:mm:ss";
  * @returns {String} 返回字符
  */
-const format = (date, _format) => {
+const format = (date: Date, _format?: string): string => {
   const _map = {
     'M+': date.getMonth() + 1, //month
     'd+': date.getDate(), //day
@@ -62,19 +55,33 @@ const format = (date, _format) => {
   return _format;
 };
 
-// 检测RangePicker组件时间值是否存在
-const checkRangePickerDate = (date) => {
+/**
+ * 检测RangePicker组件时间值是否存在
+ *
+ * @param {Array} date 时间组件值;
+ * @returns {Boolean} 返回布尔值
+ */
+const checkRangePickerDate = (date: any[]): boolean => {
   if (Array.isArray(date) && date.length) {
     return true;
   }
   return false;
 };
 
-// RangePickerDate组件时间格式化
-const formatRangePickerDate = (date, min, max, showTime = false) => {
+/**
+ * RangePickerDate组件时间格式化
+ *
+ * @param {Array} date 时间组件值
+ * @param {string} min 范围最小的字段名
+ * @param {string} max 范围最大的字段名
+ * @param {boolean} needMinAndSec 是否显示时分秒
+ * @returns {Object} 返回格式化后的对象
+ */
+
+const formatRangePickerDate = (date: any[], min: string, max: string, needMinAndSec: boolean = false): {} => {
   const formatConfig = 'YYYY-MM-DD';
   if (checkRangePickerDate(date)) {
-    if (showTime) {
+    if (needMinAndSec) {
       return {
         [min]: `${date[0].format(formatConfig)} 00:00:00`,
         [max]: `${date[1].format(formatConfig)} 23:59:59`,
@@ -93,25 +100,31 @@ const formatRangePickerDate = (date, min, max, showTime = false) => {
   }
 };
 
-const getSubjectTime = function(_dt, needMinAndSec) {
-  // _dt = '2016-05-15 09:10:04'; // 测试时间用
+/**
+  * 获取时间转换成距离当前时间的格式
 
-  if (typeof _dt !== 'string') {
-    _dt = _dt.toString();
+  @param {any} date 时间
+  @param {boolean} needMinAndSec 是否显示时分
+  @returns {string} 返回距离当前的时间
+*/
+const getSubjectTime = (date: any, needMinAndSec: boolean): string => {
+  // date = '2016-05-15 09:10:04'; // 测试时间用
+
+  if (typeof date !== 'string') {
+    date = date.toString();
   }
-  // let dayTime = _dt.split(' ')[0] + ' 00:00:00';
 
   // 如果不是日期类型
-  if (!_dt.getDate) {
-    _dt = this.toDate(_dt);
+  if (!date.getDate) {
+    date = this.toDate(date);
   }
   var _now = this.getNow(),
-    _isThisYear = _now.getFullYear() === _dt.getFullYear(),
-    _isToday = _now.getDate() === _dt.getDate(),
-    _bt = _now.getTime() / 1e3 - _dt.getTime() / 1e3, // 差值
-    _hour = _dt.getHours(),
-    _min = _dt.getMinutes(),
-    _day = _dt.getDay(),
+    _isThisYear = _now.getFullYear() === date.getFullYear(),
+    _isToday = _now.getDate() === date.getDate(),
+    _bt = _now.getTime() / 1e3 - date.getTime() / 1e3, // 差值
+    _hour = date.getHours(),
+    _min = date.getMinutes(),
+    _day = date.getDay(),
     _yesterdayBt = 86400 + _now.getHours() * 3600 + _now.getMinutes() * 60 + _now.getSeconds(),
     _rt = '';
   _hour = zeropad(_hour, 2);
@@ -139,23 +152,23 @@ const getSubjectTime = function(_dt, needMinAndSec) {
       break;
 
     case _bt >= _yesterdayBt && _isThisYear:
-      _rt = zeropad(_dt.getMonth() + 1) + '月' + zeropad(_dt.getDate()) + '日' +' ' + hourMinSuffix;
+      _rt = zeropad(date.getMonth() + 1) + '月' + zeropad(date.getDate()) + '日' + ' ' + hourMinSuffix;
       break;
 
     default:
-      _rt = _dt.getFullYear() + '年' + zeropad(_dt.getMonth() + 1) + '月' + zeropad(_dt.getDate()) + '日' + '' + hourMinSuffix;
+      _rt = date.getFullYear() + '年' + zeropad(date.getMonth() + 1) + '月' + zeropad(date.getDate()) + '日' + '' + hourMinSuffix;
       break;
   }
   return _rt;
 };
 
-const zeropad = function(val, len) {
-  val = '' + val;
-  len = len || 2;
-  while (val.length < len) {
-    val = '0' + val;
+const zeropad = (val: number, len?: number): string => {
+  let value = '' + val;
+  let zeropadLen = len || 2;
+  while (value.length < zeropadLen) {
+    value = '0' + val;
   }
-  return val;
+  return value;
 };
 
 export default {

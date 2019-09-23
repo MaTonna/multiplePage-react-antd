@@ -11,26 +11,20 @@ import regex from './regex';
  */
 /* eslint-disable no-undef */
 
-export const getResourcePath = (name) => {
+export const getResourcePath = (name: string): string => {
   return `${CONFIG.resourcePath}${name}`;
 };
 
-export const getFrontPath = (name) => {
+export const getFrontPath = (name: string): string => {
   return `${CONFIG.frontPath}${name}`;
 };
 
-// 根据用户id找到用户头像
-export const getUserLogo = (userId) => {
+export const getUserLogo = (userId: string): string => {
   return `${CONFIG.frontPath}/user/userLogoUrl.htm?userId=${userId}`;
 };
 
-/**
- * 动态引入图片
- *
- * @param {string} name
- * @returns
- */
-export const getImg = (name) => {
+declare const require: Function;
+export const getImg = (name: string): string => {
   let img = require(`@img/${name}`);
   if (img.indexOf('data:image') > -1) {
     return img;
@@ -40,10 +34,39 @@ export const getImg = (name) => {
 };
 
 /**
+ * @description 获取权限
+ */
+export const getAuth = (auth: string): boolean => {
+  const authorities = CONFIG.authorities;
+  const reg = new RegExp(auth + '(]|,)');
+  if (reg.test(authorities)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+declare const process: any;
+export const log = (...args: any) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.log(...args);
+  }
+};
+export const logError = (...args: any) => {
+  if (process.env.NODE_ENV === 'development') {
+    console.error(...args);
+  }
+};
+
+// 获得URL地址中对应参数的值
+export const getParamName = (attr: string): string => {
+  let match = RegExp(`[?&]${attr}=([^&]*)`) //分组运算符是为了把结果存到exec函数返回的结果里
+    .exec(window.location.search);
+  return match && decodeURIComponent(match[1].replace(/\+/g, ' ')); // url中+号表示空格,要替换掉
+};
+
+/**
  * @description 获取错误信息
- *
- * @param {object} data
- * @returns
  */
 export const getError = error.getError;
 export const getErrorCode = error.getErrorCode;
@@ -58,59 +81,7 @@ export const get = http.get;
 export const post = http.post;
 export const upload = http.upload;
 
-/**
- * @description 获取权限
- */
-export const getAuth = (auth) => {
-  const authorities = CONFIG.authorities;
-  const reg = new RegExp(auth + '(]|,)');
-  if (reg.test(authorities)) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-/**
- * @description 设置分页
- * @param {object} config pagination的配置选项
- * @returns {object} pagination的配置
- */
-
-export const setPagination = (config) => {
-  if (Object.prototype.toString.call(config) !== '[object Object]') {
-    T.logError('T.setPagination()方法的参数格式必须是对象哦');
-    return CONFIG.pagination;
-  }
-  return Object.assign(CONFIG.pagination, config);
-};
-
-/**
- * ================
- * 开发环境调试用功能
- * ================
- */
-
-/*eslint-disable no-console */
-export const log = (...args) => {
-  if (process.env.NODE_ENV === 'development') {
-    console.log(...args);
-  }
-};
-export const logError = (...args) => {
-  if (process.env.NODE_ENV === 'development') {
-    console.error(...args);
-  }
-};
-
-// 获得URL地址中对应参数的值
-export const getParamName = (attr) => {
-  let match = RegExp(`[?&]${attr}=([^&]*)`) //分组运算符是为了把结果存到exec函数返回的结果里
-    .exec(window.location.search);
-  return match && decodeURIComponent(match[1].replace(/\+/g, ' ')); // url中+号表示空格,要替换掉
-};
-
-export default (window.T = {
+const tools = {
   tool,
   date,
   regex,
@@ -128,8 +99,9 @@ export default (window.T = {
   showErrorModal,
   showErrorMessage,
   getAuth,
-  setPagination,
   log,
   logError,
   getParamName
-});
+}
+window.T = tools;
+export default tools;

@@ -5,13 +5,13 @@
  * @param {Int} len 要填补0的个数
  * @returns {String} val
  */
-const zeropad = (val, len) => {
-  val = '' + val;
-  len = len || 2;
-  while (val.length < len) {
-    val = '0' + val;
+const zeropad = (val: number, len?: number): string => {
+  let value = '' + val;
+  let zeropadLen = len || 2;
+  while (value.length < zeropadLen) {
+    value = '0' + val;
   }
-  return val;
+  return value;
 };
 
 /**防抖
@@ -21,10 +21,10 @@ const zeropad = (val, len) => {
  * @param {*} wait 等待时间
  * @param {*} immediate  是否立即执行
  */
-const debounce = (func, wait, immediate) => {
+const debounce = (func: Function, wait: number, immediate: boolean): Function => {
   let timeout, result;
 
-  const debounced = function() {
+  const debounced = function () {
     let context = this;
     let args = arguments;
 
@@ -32,19 +32,19 @@ const debounce = (func, wait, immediate) => {
     if (immediate) {
       // 如果已经执行过，不再执行
       var callNow = !timeout;
-      timeout = setTimeout(function() {
+      timeout = setTimeout(function () {
         timeout = null;
       }, wait);
       if (callNow) result = func.apply(context, args);
     } else {
-      timeout = setTimeout(function() {
+      timeout = setTimeout(function () {
         func.apply(context, args);
       }, wait);
     }
     return result;
   };
 
-  debounced.cancel = function() {
+  debounced.cancel = function () {
     clearTimeout(timeout);
     timeout = null;
   };
@@ -53,20 +53,20 @@ const debounce = (func, wait, immediate) => {
 };
 
 // 节流
-const throttle = function(fn, delay) {
+const throttle = function (fn: Function, delay: number): Function {
   let timer = null;
-  return function() {
+  return function () {
     let context = this,
       args = arguments;
     clearTimeout(timer);
-    timer = setTimeout(function() {
+    timer = setTimeout(function () {
       fn.apply(context, args);
     }, delay);
   };
 };
 
 // 分割base64,后端要用
-const splitBase64 = (base64) => {
+const splitBase64 = (base64: string): string => {
   if (base64.indexOf(';base64,') !== -1) {
     return base64.split(';base64,')[1];
   }
@@ -74,7 +74,7 @@ const splitBase64 = (base64) => {
 };
 
 //base64转blob
-const dataURLtoBlob = (dataURI) => {
+const dataURLtoBlob = (dataURI: string): Blob => {
   let byteString = atob(dataURI.split(',')[1]);
 
   let mimeString = dataURI
@@ -94,7 +94,7 @@ const dataURLtoBlob = (dataURI) => {
 };
 
 //图片转base64
-const getBase64Image = (imgUrl) => {
+const getBase64Image = (imgUrl: string): Promise<any> => {
   return new Promise((resolve) => {
     let img = new Image();
     img.setAttribute('crossOrigin', 'Anonymous');

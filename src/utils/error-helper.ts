@@ -4,9 +4,9 @@ import { message, Modal } from 'antd';
  * 获取错误信息
  *
  * @param {object} data
- * @returns
+ * @returns 错误信息
  */
-const getError = (data) => {
+const getError = (data: object): string => {
   if (!data) return '';
   if (typeof data !== 'object') {
     return data;
@@ -39,10 +39,9 @@ const getError = (data) => {
 /**
  * 获取错误信息(主要针对的是没有请求到后端接口的情况)[提前拦截了，用不上]
  *
- * @param {object} data
- * @returns
+ * @param {object} error
  */
-const showCatchError = (error) => {
+const showCatchError = (error: object): void => {
   T.logError('catchError:', error);
   message.error('系统错误');
 };
@@ -51,9 +50,9 @@ const showCatchError = (error) => {
  * 获取错误代码
  *
  * @param {object} data
- * @returns
+ * @returns 错误代码
  */
-const getErrorCode = (data) => {
+const getErrorCode = (data: object): string => {
   if (data['errorCode']) {
     return data['errorCode'];
   } else if (data['error'] && typeof data['error'] === 'object') {
@@ -73,7 +72,7 @@ const getErrorCode = (data) => {
  * @param {object} data
  * @returns
  */
-const showErrorModal = (data) => {
+const showErrorModal = (data: object): void => {
   if (getErrorCode(data) === 'USER_NOT_LOGIN') {
     Modal.error({
       title: '提示',
@@ -95,11 +94,9 @@ const showErrorModal = (data) => {
  * 用message显示错误信息
  *
  * @param {object} data
- * @returns
  */
-const showErrorMessage = (data) => {
+const showErrorMessage = (data: object): void => {
   if (getErrorCode(data) === 'USER_NOT_LOGIN') {
-    // message.error(getError(data));
     Modal.error({
       title: '提示',
       content: '未登录，请先登录！',

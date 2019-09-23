@@ -190,9 +190,7 @@ class DemoPageForm extends Component<FormProps, State> {
             </Row>
           </Form>
           <div className="content-main">
-
             <Table
-              className="my-table"
               rowKey={(row: { key: string }) => row.key}
               columns={columns}
               dataSource={dataSource}
@@ -202,6 +200,7 @@ class DemoPageForm extends Component<FormProps, State> {
                 total: items,
                 current: page,
                 pageSize: itemsPerPage,
+                showQuickJumper: true,
                 showSizeChanger: true,
                 pageSizeOptions: CONFIG.pagination.pageSizeOptions,
                 showTotal: (total: number) => `共计 ${total} 条记录`,
