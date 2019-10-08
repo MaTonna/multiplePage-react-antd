@@ -1,0 +1,38 @@
+@fullHeight: 500px;
+.board-list {
+    width: 100%;
+    .base-card {
+        float: left;
+        padding: 10px;
+        margin: 0.25%;
+        height: @fullHeight;
+        background: #fff;
+    }
+    .large-card {
+        width: 100%;
+        height: @fullHeight;
+    }
+    .middle-card {
+        width: 49.5%;
+        height: @fullHeight;
+    }
+    .quarter-card {
+        width: 74.5%;
+        height: @fullHeight;
+    }
+    .small-card {
+        width: 24.5%;
+        height: (@fullHeight / 2) - 4.5;
+    }
+    .volume {
+        font-size: 22px;
+    }
+    .volume-over {
+        color: #3f8600;
+    }
+    .volume-short {
+        color: #cf1322;
+    }
+    // .chart-wrap {
+    // }
+}

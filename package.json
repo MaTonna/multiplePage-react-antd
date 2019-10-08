@@ -43,6 +43,7 @@
     "copy-webpack-plugin": "^4.5.1",
     "core-js": "^3.2.1",
     "css-loader": "^0.28.11",
+    "echarts": "^4.3.0",
     "eslint": "^4.19.1",
     "eslint-loader": "^2.2.1",
     "eslint-plugin-flowtype": "^3.13.0",

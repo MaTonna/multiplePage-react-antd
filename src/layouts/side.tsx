@@ -11,13 +11,13 @@ if (!localStorage.hasOwnProperty('siderCollapsed')) {
   siderCollapsed = localStorage.getItem('siderCollapsed') === 'true';
 }
 
-interface IProps extends FormComponentProps {
+interface Props extends FormComponentProps {
   // selected: string[]
   menuList: any[];
   topKey: string;
   topMenuMap: {};
 }
-class UserMenu extends React.Component<IProps, any> {
+class UserMenu extends React.Component<Props, any> {
   state = {
     changePswVisible: false,
     collapsed: siderCollapsed,
@@ -72,6 +72,7 @@ class UserMenu extends React.Component<IProps, any> {
     return (
       <Sider
         className="layout-sider"
+        id="layoutSider"
         width={256}
         trigger={null}
         collapsedWidth={10}
@@ -108,4 +109,4 @@ class UserMenu extends React.Component<IProps, any> {
   }
 }
 
-export default Form.create()(UserMenu);
+export default Form.create<Props>()(UserMenu);

@@ -9,6 +9,7 @@ declare namespace CONFIG {
   const userId: string;
   const authorities: string;
   const timeRanges: [];
+  let normalForm: Function;
   let formItemLayout: {};
   let pagination: {
     pageSizeOptions: Array<string>

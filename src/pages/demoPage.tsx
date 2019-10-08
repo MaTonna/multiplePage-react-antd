@@ -102,27 +102,13 @@ class DemoPageForm extends Component<FormProps, State> {
             <Row type="flex">
               <Col key="title1">
                 <FormItem {...formItemLayout} label="输入框">
-                  {getFieldDecorator('title1', {
-                    rules: [
-                      {
-                        required: false
-                      }
-                    ],
-                    initialValue: ''
-                  })(<Input placeholder="" />)}
+                  {getFieldDecorator('title1')(<Input placeholder="" />)}
                 </FormItem>
               </Col>
               <Col key="title2">
                 <FormItem {...formItemLayout} label="选择器">
-                  {getFieldDecorator('title2', {
-                    rules: [
-                      {
-                        required: false
-                      }
-                    ],
-                    initialValue: ''
-                  })(
-                    <Select onChange={null}>
+                  {getFieldDecorator('title2')(
+                    <Select>
                       <Option value="jack">Jack</Option>
                       <Option value="lucy">Lucy</Option>
                     </Select>
@@ -131,50 +117,22 @@ class DemoPageForm extends Component<FormProps, State> {
               </Col>
               <Col key="title3">
                 <FormItem {...formItemLayout} label="日期选择框">
-                  {getFieldDecorator('title3', {
-                    rules: [
-                      {
-                        required: false
-                      }
-                    ],
-                    initialValue: ''
-                  })(<RangePicker onChange={null} />)}
+                  {getFieldDecorator('title3')(<RangePicker onChange={null} />)}
                 </FormItem>
               </Col>
               <Col key="title4">
                 <FormItem {...formItemLayout} label="标题4">
-                  {getFieldDecorator('title4', {
-                    rules: [
-                      {
-                        required: false
-                      }
-                    ],
-                    initialValue: ''
-                  })(<Input placeholder="" />)}
+                  {getFieldDecorator('title4')(<Input placeholder="" />)}
                 </FormItem>
               </Col>
               <Col key="title5">
                 <FormItem {...formItemLayout} label="标题5">
-                  {getFieldDecorator('title5', {
-                    rules: [
-                      {
-                        required: false
-                      }
-                    ],
-                    initialValue: ''
-                  })(<Input placeholder="" />)}
+                  {getFieldDecorator('title5')(<Input placeholder="" />)}
                 </FormItem>
               </Col>
               <Col key="title6">
                 <FormItem {...formItemLayout} label="标题6">
-                  {getFieldDecorator('title6', {
-                    rules: [
-                      {
-                        required: false
-                      }
-                    ],
-                    initialValue: ''
-                  })(<Input placeholder="" />)}
+                  {getFieldDecorator('title6')(<Input placeholder="" />)}
                 </FormItem>
               </Col>
             </Row>
@@ -189,42 +147,41 @@ class DemoPageForm extends Component<FormProps, State> {
               </Col>
             </Row>
           </Form>
-          <div className="content-main">
-            <Table
-              rowKey={(row: { key: string }) => row.key}
-              columns={columns}
-              dataSource={dataSource}
-              loading={loading}
-              locale={{ emptyText: '未找到对应内容' }}
-              pagination={{
-                total: items,
-                current: page,
-                pageSize: itemsPerPage,
-                showQuickJumper: true,
-                showSizeChanger: true,
-                pageSizeOptions: CONFIG.pagination.pageSizeOptions,
-                showTotal: (total: number) => `共计 ${total} 条记录`,
-                onChange: (current: number, size: number) => {
-                  this.handlePagination(current, size);
-                },
-                onShowSizeChange: (current: number, size: number) => {
-                  localStorage.setItem('pageSizeOption', size.toString())
-                  this.handlePagination(current, size);
-                },
-              }}
-            />
-          </div>
-
-          <AddModal
-            visible={isShowAddModal}
-            closeModal={() => {
-              this.setState({
-                isShowAddModal: false
-              })
+        </div>
+        <div className="content-main">
+          <Table
+            rowKey={(row: { key: string }) => row.key}
+            columns={columns}
+            dataSource={dataSource}
+            loading={loading}
+            locale={{ emptyText: '未找到对应内容' }}
+            pagination={{
+              total: items,
+              current: page,
+              pageSize: itemsPerPage,
+              showQuickJumper: true,
+              showSizeChanger: true,
+              pageSizeOptions: CONFIG.pagination.pageSizeOptions,
+              showTotal: (total: number) => `共计 ${total} 条记录`,
+              onChange: (current: number, size: number) => {
+                this.handlePagination(current, size);
+              },
+              onShowSizeChange: (current: number, size: number) => {
+                localStorage.setItem('pageSizeOption', size.toString())
+                this.handlePagination(current, size);
+              },
             }}
           />
-
         </div>
+
+        <AddModal
+          visible={isShowAddModal}
+          closeModal={() => {
+            this.setState({
+              isShowAddModal: false
+            })
+          }}
+        />
       </BasicLayout >
     )
   }
