@@ -190,12 +190,10 @@ const initialState = {
     type: 'tabsAndChart',
     timeTabType: '2',
     chartType: 'form',
-    pietitle: '销售额',
     titleTabList: [{
       title: '业绩榜',
       code: '1',
     }],
-    unit: '¥',
     data: [{
       name: '客户池1',
       value: 20000
@@ -220,12 +218,10 @@ const initialState = {
     type: 'tabsAndChart',
     timeTabType: '2',
     chartType: 'form',
-    pietitle: '销售额',
     titleTabList: [{
       title: '开户榜',
       code: '1'
     }],
-    unit: '¥',
     data: [{
       name: '客户池1',
       value: 20000
