@@ -3,6 +3,7 @@ import date from './date-helper';
 import http from './http-helper';
 import error from './error-helper';
 import regex from './regex';
+import math from './math-helper';
 
 /**
  * 注意:
@@ -86,6 +87,7 @@ const tools = {
   date,
   regex,
   error,
+  math,
   getResourcePath,
   getFrontPath,
   getUserLogo,

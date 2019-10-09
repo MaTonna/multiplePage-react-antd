@@ -18,18 +18,16 @@ class VolumeCard extends Component<Props, State> {
     const deltaVolume = volume - lastMonthVolume;
     const positiveNum = Math.abs(deltaVolume);
     return (
-      <Fragment>
-        <div className="base-card small-card">
-          <h3 className="card-title">{title}</h3>
-          <p className="volume">¥{volume}</p>
-          <p>距上月销售额：<span className="volume">{lastMonthVolume}</span></p>
-          {deltaVolume >= 0 ? <p>
-            已超<span className="volume-over">¥{positiveNum}</span>
-          </p> : <p>
-              还差<span className="volume-short">¥{positiveNum}</span>
-            </p>}
-        </div>
-      </Fragment>
+      <div className="base-card small-card">
+        <h3 className="card-title">{title}</h3>
+        <p className="volume">¥{volume}</p>
+        <p>距上月销售额：<span className="volume">{lastMonthVolume}</span></p>
+        {deltaVolume >= 0 ? <p>
+          已超<span className="volume-over">¥{positiveNum}</span>
+        </p> : <p>
+            还差<span className="volume-short">¥{positiveNum}</span>
+          </p>}
+      </div>
     )
   }
 }

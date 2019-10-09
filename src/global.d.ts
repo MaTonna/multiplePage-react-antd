@@ -81,6 +81,13 @@ declare namespace T {
     function showErrorMessage(data: object): void;
   }
 
+  namespace math {
+    function floatAdd(arg1, arg2): number;
+    function floatSub(arg1, arg2): number;
+    function floatMul(arg1, arg2): number;
+    function floatDiv(arg1, arg2): number;
+  }
+
   // 常用正则
   namespace regex {
     const password: RegExp; //字符验证，支持字母、数字和特殊字符（仅限!@#$%^&*())

@@ -1,12 +1,13 @@
-@fullHeight: 500px;
+@fullHeight: 520px;
 .board-list {
     width: 100%;
     .base-card {
         float: left;
-        padding: 10px;
+        padding: 0 10px 10px 10px;
         margin: 0.25%;
         height: @fullHeight;
         background: #fff;
+        overflow: hidden;
     }
     .large-card {
         width: 100%;
@@ -16,7 +17,7 @@
         width: 49.5%;
         height: @fullHeight;
     }
-    .quarter-card {
+    .three-quarter-card {
         width: 74.5%;
         height: @fullHeight;
     }
@@ -33,6 +34,42 @@
     .volume-short {
         color: #cf1322;
     }
-    // .chart-wrap {
-    // }
+    .tooltip-icon {
+        display: inline-block;
+        margin-right: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+    .tooltip-percent {
+        margin-left: 19px;
+    }
+    .tabs-no-margin {
+        .ant-tabs-bar {
+            margin: 0;
+        }
+    }
+    .card-table {
+        margin-top: 5px;
+        width: 100%;
+        text-align: center;
+        th {
+            padding: 6px 0;
+            font-size: 15px;
+        }
+        td {
+            padding: 5px 0;
+            &:first-child {
+                font-weight: bold;
+            }
+        }
+        tbody {
+            tr:last-child {
+                border-top: 1px solid #e8e8e8;
+                td {
+                    padding-top: 8px;
+                }
+            }
+        }
+    }
 }

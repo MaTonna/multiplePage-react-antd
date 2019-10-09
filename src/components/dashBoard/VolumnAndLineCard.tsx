@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import volumnLineChartOption from './chartOptions';
+import React, { Component } from 'react';
+import { volumnLineChartOption } from './chartOptions';
 const echarts = require('echarts/lib/echarts');
 require('echarts/lib/chart/line');
 require('echarts/lib/component/tooltip');
@@ -9,7 +9,7 @@ type Props = {
   value: number
   id: number
   areaColor: string
-  data: Array<Object>
+  data: Array<object>
 }
 
 const initialState = {
@@ -20,6 +20,7 @@ type State = Readonly<typeof initialState>;
 
 class VolumnAndLineCard extends Component<Props, State> {
   readonly state: State = initialState;
+
   chart = null;
 
   componentDidMount() {
@@ -30,9 +31,8 @@ class VolumnAndLineCard extends Component<Props, State> {
     const { id, areaColor, data } = this.props;
     setTimeout(() => {
       const dom = document.getElementById(`volumnLineChart-${id}`);
-      this.chart = echarts.init(dom, null, { height: '120px' });
-      const chartOption = this.setChartOption(areaColor, data);
-      this.chart.setOption(chartOption);
+      this.chart = echarts.init(dom, null, { height: '140px' });
+      this.chart.setOption(this.setChartOption(areaColor, data));
     }, 0);
   }
 

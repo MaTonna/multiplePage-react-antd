@@ -114,7 +114,7 @@ class BasicLayout extends React.Component<IProps, State> {
               className="layout-content"
               style={{
                 position: 'relative',
-                margin: '10px 10px 0',
+                margin: '10px',
                 overflow: 'auto',
               }}
             >
