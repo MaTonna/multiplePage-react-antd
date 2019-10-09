@@ -77,16 +77,6 @@ const pieChartOption = {
     right: '7%',
     data: []
   },
-  graphic: {
-    type: 'text',
-    // left: '33%',
-    // top: '42%',
-    style: {
-      textAlign: 'center',
-      fill: '#777',
-      font: '18px Microsoft YaHei'
-    }
-  },
   series: {
     type: 'pie',
     center: ['30%', '50%'],
@@ -115,7 +105,7 @@ const lineChartOption = {
     trigger: 'axis'
   },
   legend: {
-    data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
+    data: []
   },
   grid: {
     left: '3%',
@@ -131,7 +121,7 @@ const lineChartOption = {
   xAxis: {
     type: 'category',
     boundaryGap: false,
-    data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+    data: []
   },
   yAxis: {
     splitLine,
