@@ -3,7 +3,6 @@ import { volumnLineChartOption } from './chartOptions';
 const echarts = require('echarts/lib/echarts');
 require('echarts/lib/chart/line');
 require('echarts/lib/component/tooltip');
-
 type Props = {
   title: string
   value: number

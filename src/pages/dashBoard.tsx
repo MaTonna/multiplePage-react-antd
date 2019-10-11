@@ -190,26 +190,24 @@ const initialState = {
     type: 'tabsAndChart',
     timeTabType: '2',
     chartType: 'form',
+    formTabs: [{
+      code: 'total',
+      name: '总排行'
+    },
+    {
+      code: 'company',
+      name: '公司排行'
+    },
+    {
+      code: 'grade',
+      name: '小组排行'
+    }
+    ],
     titleTabList: [{
       title: '业绩榜',
       code: '1',
     }],
-    data: [{
-      name: '客户池1',
-      value: 20000
-    }, {
-      name: '客户池2',
-      value: 50000
-    }, {
-      name: '客户池3',
-      value: 10000
-    }, {
-      name: '客户池4',
-      value: 45000
-    }, {
-      name: '客户池5',
-      value: 25000
-    }]
+    data: []
   }, {
     id: 9,
     grade: 'P',
@@ -222,22 +220,7 @@ const initialState = {
       title: '开户榜',
       code: '1'
     }],
-    data: [{
-      name: '客户池1',
-      value: 20000
-    }, {
-      name: '客户池2',
-      value: 50000
-    }, {
-      name: '客户池3',
-      value: 10000
-    }, {
-      name: '客户池4',
-      value: 45000
-    }, {
-      name: '客户池5',
-      value: 25000
-    }]
+    data: []
   }]
 };
 

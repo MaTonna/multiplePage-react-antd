@@ -1,13 +1,14 @@
 // 颜色取自于https://bizcharts.net/products/bizCharts/api/theme
 const COLOR_PIE = ['#1890FF', '#13C2C2', '#2FC25B', '#FACC14', '#F04864', '#8543E0', '#3436C7', '#223273'];
 const COLOR_PLATE_8 = ['#1890FF', '#2FC25B', '#FACC14', '#223273', '#8543E0', '#13C2C2', '#3436C7', '#F04864'];
+
 const splitLine = {
   lineStyle: {
     color: '#f1f1f1',
     type: 'dashed'
   }
 }
-
+const opacity = 0.9;
 const volumnLineChartOption = {
   tooltip: {
     trigger: 'axis',
@@ -63,8 +64,12 @@ const percentBarChartOption = {
     splitLine,
     type: 'value',
   },
+  itemStyle: {
+    opacity,
+  },
   series: []
 }
+
 const pieChartOption = {
   color: COLOR_PIE,
   tooltip: {
@@ -93,6 +98,9 @@ const pieChartOption = {
       normal: {
         show: false
       }
+    },
+    itemStyle: {
+      opacity,
     },
     data: []
   }
@@ -126,6 +134,9 @@ const lineChartOption = {
   yAxis: {
     splitLine,
     type: 'value',
+  },
+  itemStyle: {
+    opacity,
   },
   series: []
 }

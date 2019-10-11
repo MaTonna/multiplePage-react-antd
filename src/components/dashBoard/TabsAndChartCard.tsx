@@ -13,14 +13,14 @@ type Props = {
   id: boolean
   grade: string
   type: string
-  size: string
+  size: "quarter" | "half" | "threeQuarter"
   url: string
   chartType: string
   valuesParam: Array<string>
   titleTabList: Array<object>
   data: Array<object>
   pietitle?: string
-  timeTabType?: string
+  timeTabType?: "1" | "2"
   canShowAllData?: boolean
   isStack?: boolean
   unit?: string
