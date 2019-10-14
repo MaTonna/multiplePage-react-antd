@@ -1,3 +1,10 @@
+/*
+ * @Description: 仪表盘
+ * @Author: xiaoya
+ * @Date: 2019-10-12 11:01:23
+ * @Last Modified by: xiaoya
+ * @Last Modified time: 2019-10-12 11:01:23
+ */
 import React, { Component, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import BasicLayout from '@layouts/BasicLayout';

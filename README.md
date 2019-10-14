@@ -18,6 +18,7 @@ npm run build
     "prefix": "tsClass",
     "body": [
       "import React, { Component,ReactNode } from 'react';",
+      "import BasicLayout from '@layouts/BasicLayout';",
       "$2",
       "interface Prop {",
       "$2",
@@ -31,11 +32,11 @@ npm run build
       "readonly state: State = initialState;",
       "render():ReactNode{",
       "return (",
-      "<div></div>",
+      "<BasicLayout></BasicLayout>",
       ")",
       "}",
       "}",
-      "export default Demo;"
+      "ReactDOM.render(<Demo />, document.getElementById('root'));"
     ],
     "description": "new a page class"
   }
