@@ -30,7 +30,7 @@ class VolumnAndLineCard extends Component<Props, State> {
     const { id, areaColor, data } = this.props;
     setTimeout(() => {
       const dom = document.getElementById(`volumnLineChart-${id}`);
-      this.chart = echarts.init(dom, null, { height: '140px' });
+      this.chart = echarts.init(dom, null, { height: '100px' });
       this.chart.setOption(this.setChartOption(areaColor, data));
     }, 0);
   }

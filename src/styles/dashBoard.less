@@ -1,10 +1,11 @@
 @fullHeight: 520px;
+@cardSplitWidth: 0.8%;
 .board-list {
     width: 100%;
     .base-card {
         float: left;
         padding: 0 10px 10px 10px;
-        margin: 0.25%;
+        margin: @cardSplitWidth;
         height: @fullHeight;
         background: #fff;
         overflow: hidden;
@@ -14,25 +15,31 @@
         height: @fullHeight;
     }
     .middle-card {
-        width: 49.5%;
+        width: 50 - @cardSplitWidth * 2;
         height: @fullHeight;
     }
     .three-quarter-card {
-        width: 74.5%;
+        width: 75 - @cardSplitWidth * 2;
         height: @fullHeight;
     }
     .small-card {
-        width: 24.5%;
-        height: (@fullHeight / 2) - 4.5;
+        width: 25 - @cardSplitWidth * 2;
+        height: (@fullHeight / 2) - 13;
     }
     .volume {
-        font-size: 22px;
+        margin: 0 0 5px 20px;
+        font-size: 35px;
+        color: #000;
     }
     .volume-over {
         color: #3f8600;
     }
     .volume-short {
         color: #cf1322;
+    }
+    .card-title {
+        color: #666;
+        margin: 20px 0 10px 20px;
     }
     .tooltip-icon {
         display: inline-block;
@@ -54,7 +61,6 @@
         width: 100%;
         text-align: center;
         th {
-            padding: 6px 0;
             font-size: 15px;
         }
         td {
@@ -69,6 +75,21 @@
                 td {
                     padding-top: 8px;
                 }
+            }
+        }
+    }
+    .tab-title {
+        .ant-tabs-tab {
+            font-size: 15px;
+        }
+    }
+    .single-tab {
+        .ant-tabs-nav {
+            .ant-tabs-tab-active {
+                color: #626262;
+            }
+            .ant-tabs-ink-bar {
+                background-color: transparent;
             }
         }
     }

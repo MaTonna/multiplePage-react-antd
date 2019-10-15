@@ -3,7 +3,7 @@
  * @Author: xiaoya
  * @Date: 2019-10-12 11:01:23
  * @Last Modified by: xiaoya
- * @Last Modified time: 2019-10-12 11:01:23
+ * @Last Modified time: 2019-10-14 12:15:44
  */
 import React, { Component, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
@@ -110,8 +110,6 @@ const initialState = {
     valuesParam: ['本组销售额', '个人销售额'],
     titleTabList: [{
       title: '本组及个人销售额',
-      code: '1',
-      urlParam: 'myVol'
     }],
     data: [{
       key: '2019-09-29',
@@ -128,6 +126,12 @@ const initialState = {
     }, {
       key: '2019-10-04',
       values: [25, 6]
+    }, {
+      key: '2019-10-07',
+      values: [20, 7]
+    }, {
+      key: '2019-10-08',
+      values: [18, 9]
     }]
   }, {
     id: 6,
@@ -142,6 +146,10 @@ const initialState = {
       title: '不同客户类型销售额占比',
       code: '1',
       urlParam: 'myVol'
+    }, {
+      title: '不同客户类型销售额占比2',
+      code: '2',
+      urlParam: 'myVol2'
     }],
     unit: '¥',
     data: [{
@@ -181,7 +189,7 @@ const initialState = {
       values: [10, 6, 7]
     }, {
       key: '2019-09-30',
-      values: [7, 6, 8]
+      values: [9, 6, 8]
     }, {
       key: '2019-10-02',
       values: [15, 5, 9]

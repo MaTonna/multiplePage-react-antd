@@ -9,6 +9,11 @@ require('echarts/lib/component/legend');
 import { percentBarChartOption, barSeriesOpt, pieChartOption, lineChartOption, lineSeriesOpt } from '@components/dashBoard/chartOptions';
 const { TabPane } = Tabs;
 const ButtonGroup = Button.Group;
+type TitleTab = {
+  title: string
+  code?: string
+  urlParam?: string
+}
 type Props = {
   id: boolean
   grade: string
@@ -17,7 +22,7 @@ type Props = {
   url: string
   chartType: string
   valuesParam: Array<string>
-  titleTabList: Array<object>
+  titleTabList: Array<TitleTab>
   data: Array<object>
   pietitle?: string
   timeTabType?: "1" | "2"
@@ -73,6 +78,24 @@ class TabsAndChartCard extends Component<Props, State> {
     this.setState({
       currentKey: timeTabType ? timeButtonsMap[timeTabType][0]['code'] : ''
     })
+  }
+
+  getOptHTML = () => {
+    const { timeTabType } = this.props;
+    const { currentKey } = this.state;
+    return timeTabType &&
+      <ButtonGroup>
+        {
+          timeButtonsMap[timeTabType].map(item =>
+            <Button
+              size="small"
+              key={item.code}
+              type={currentKey === item.code ? 'primary' : 'default'}
+              onClick={() => this.changeTimeTab(item.code)}
+            >{item.name}</Button>
+          )
+        }
+      </ButtonGroup>
   }
 
   renderChart = (): void => {
@@ -271,28 +294,31 @@ class TabsAndChartCard extends Component<Props, State> {
   }
 
   render() {
-    const { id, size, titleTabList = [], timeTabType, chartType } = this.props;
-    const { currentKey, formHTML } = this.state;
+    const { id, size, titleTabList = [{ title: '', code: '' }], chartType } = this.props;
+    const { formHTML } = this.state;
     const isForm = chartType === 'form';
+    const optHTML = this.getOptHTML();
+    // 单个tab没有蓝色选中线，表格的tab去掉maginBottom
+    let tabsClass = 'tab-title';
+    if (titleTabList.length === 1) {
+      tabsClass += ' single-tab';
+    }
+    if (isForm) {
+      tabsClass += ' tabs-no-margin';
+    }
     return (
       <div className={`base-card ${sizeMap[size]}`}>
-        <Tabs
-          className={isForm && "tabs-no-margin"}
-          tabBarExtraContent={
-            timeTabType && <ButtonGroup>
-              {
-                timeButtonsMap[timeTabType].map(item =>
-                  <Button size="small" key={item.code} type={currentKey === item.code ? 'primary' : 'default'} onClick={() => this.changeTimeTab(item.code)}>{item.name}</Button>
-                )
-              }
-            </ButtonGroup>
-          }>
-          {
-            titleTabList.map((item: any) =>
-              <TabPane tab={item.title} key={item.code}></TabPane>
-            )
-          }
-        </Tabs>
+        {
+          <Tabs
+            className={tabsClass}
+            tabBarExtraContent={optHTML}>
+            {
+              titleTabList.map((item: any) =>
+                <TabPane tab={item.title} key={item.code} />
+              )
+            }
+          </Tabs>
+        }
         {
           isForm ?
             formHTML :

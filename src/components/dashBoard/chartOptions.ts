@@ -101,6 +101,8 @@ const pieChartOption = {
     },
     itemStyle: {
       opacity,
+      borderColor: '#fff',
+      borderWidth: 10,
     },
     data: []
   }
@@ -143,15 +145,17 @@ const lineChartOption = {
 
 const barSeriesOpt = {
   type: 'bar',
-  barWidth: '20%',
+  barWidth: '40%',
 }
 
 const lineSeriesOpt = {
   type: 'line',
+  smooth: true,
   label: {
     normal: {
       show: true,
-      position: 'top'
+      position: 'top',
+      offset: [8, 0]
     }
   },
 }
