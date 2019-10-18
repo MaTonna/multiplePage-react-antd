@@ -1,0 +1,96 @@
+@fullHeight: 520px;
+@cardSplitWidth: 0.8%;
+.board-list {
+    width: 100%;
+    .base-card {
+        float: left;
+        padding: 0 10px 10px 10px;
+        margin: @cardSplitWidth;
+        height: @fullHeight;
+        background: #fff;
+        overflow: hidden;
+    }
+    .large-card {
+        width: 100%;
+        height: @fullHeight;
+    }
+    .middle-card {
+        width: 50 - @cardSplitWidth * 2;
+        height: @fullHeight;
+    }
+    .three-quarter-card {
+        width: 75 - @cardSplitWidth * 2;
+        height: @fullHeight;
+    }
+    .small-card {
+        width: 25 - @cardSplitWidth * 2;
+        height: (@fullHeight / 2) - 13;
+    }
+    .volume {
+        margin: 0 0 5px 20px;
+        font-size: 35px;
+        color: #000;
+    }
+    .volume-over {
+        color: #3f8600;
+    }
+    .volume-short {
+        color: #cf1322;
+    }
+    .card-title {
+        color: #666;
+        margin: 20px 0 10px 20px;
+    }
+    .tooltip-icon {
+        display: inline-block;
+        margin-right: 5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+    .tooltip-percent {
+        margin-left: 19px;
+    }
+    .tabs-no-margin {
+        .ant-tabs-bar {
+            margin: 0;
+        }
+    }
+    .card-table {
+        margin-top: 5px;
+        width: 100%;
+        text-align: center;
+        th {
+            font-size: 15px;
+        }
+        td {
+            padding: 5px 0;
+            &:first-child {
+                font-weight: bold;
+            }
+        }
+        tbody {
+            tr:last-child {
+                border-top: 1px solid #e8e8e8;
+                td {
+                    padding-top: 8px;
+                }
+            }
+        }
+    }
+    .tab-title {
+        .ant-tabs-tab {
+            font-size: 15px;
+        }
+    }
+    .single-tab {
+        .ant-tabs-nav {
+            .ant-tabs-tab-active {
+                color: #626262;
+            }
+            .ant-tabs-ink-bar {
+                background-color: transparent;
+            }
+        }
+    }
+}

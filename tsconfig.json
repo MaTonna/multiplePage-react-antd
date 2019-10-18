@@ -1,31 +1,23 @@
 {
   "compilerOptions": {
     "baseUrl": "./src/",
-    "outDir": "./static/",
-    "sourceMap": false,
-    "noImplicitAny": false,
-    "module": "esnext",
-    "target": "es2017",
-    "lib": [ "dom", "esnext"],
-    "moduleResolution": "node",
-    "esModuleInterop": true,
     "jsx": "react",
-    "rootDirs": [
-      "src/"
+    "target": "es5",
+    "allowSyntheticDefaultImports": true,
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "lib": [
+      "es5",
+      "dom",
+      "es2015.collection"
     ],
-    "experimentalDecorators": true,
     "paths": {
       "@models/*": [
         "models/*"
       ],
-      "@modals/*": [
-        "modals/*"
-      ],
       "@routes/*": [
         "routes/*"
-      ],
-      "@pages/*": [
-        "pages/*"
       ],
       "@styles/*": [
         "styles/*"
@@ -33,12 +25,24 @@
       "@components/*": [
         "components/*"
       ],
-      "@layouts/*": [
-        "layouts/*"
+      "@img/*": [
+        "img/*"
+      ],
+      "@api/*": [
+        "api/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ],
+      "@webim/*": [
+        "webim/*"
       ],
       "@utils/*": [
         "utils/*"
       ]
     }
-  }
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }

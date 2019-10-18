@@ -1,6 +1,6 @@
 
 import { Modal } from "antd";
-const { get, post, upload } = T;
+const { get, post, upload } = window.T;
 
 const urlMap = {
   uploadImg: "/imageUpload.json",

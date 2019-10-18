@@ -1,19 +1,17 @@
 const path = require('path')
 const webpack = require('webpack')
-
-/* eslint-disable no-undef */
+const htdocsPath = '../static';
 module.exports = {
   entry: {
     vendor: [
       'react',
       'react-dom',
       'prop-types',
-      'dva',
-      'moment'
+      'moment',
     ]
   },
   output: {
-    path: path.resolve(__dirname, '../libs'),
+    path: path.resolve(__dirname, `${htdocsPath}/libs`),
     filename: '[name].dll.js',
     library: '[name]'
   },

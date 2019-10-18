@@ -1,95 +1,129 @@
-const path = require('path');
-const glob = require('glob');
-const webpack = require('webpack');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HappyPack = require('happypack');
-
-// 多入口配置
-const jsFileMap = {};
-
-glob.sync('**/*.[jt]s?(x)', {
-  cwd: path.join(__dirname, '../src/pages')
-}).forEach((item) => {
-  const finename = item.replace(/\.[tj]sx?$/, '')
-  jsFileMap[finename] = `./src/pages/${finename}`;
+const path = require("path");
+const webpack = require("webpack");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const files = ["index", "login"];
+const htmlPluginArr = [];
+// 按照templete.html模板动态生成index.html、login.html
+const htdocsPath = "../static";
+// const htdocsPath = "../../htdocs/static";
+files.forEach(file => {
+  htmlPluginArr.push(
+    new HtmlWebpackPlugin({
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true
+      },
+      // favicon: `favicon.ico`,
+      template: `./template.html`,
+      filename: `${htdocsPath}/${file}.html`,
+      chunks: [file]
+    })
+  );
 });
-const htdocsSrc = path.join(__dirname, '../static');
-// path.join(__dirname, '../../htdocs/static'),
 module.exports = {
-  entry: jsFileMap,
+  entry: {
+    index: ["./src/pages/index"],
+    login: ["./src/pages/login"],
+    common: ["./src/pages/common"],
+  },
   output: {
-    path: htdocsSrc,
-    filename: 'js/[name].js'
+    publicPath: 'http://localhost:9000/',
+    path: path.resolve(__dirname, htdocsPath),
+    filename: "js/[name].js",
+    chunkFilename: "js/[name].js"
   },
   module: {
     rules: [
       {
-        test: /\.(ts|js)x?$/,
-        exclude: /node_modules/,
-        use: 'happypack/loader'
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"]
       },
       {
-        test: /\.css$/,
+        test: /\.less$/,
+        exclude: '/node_modules',
         use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader'
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: "css-loader",
+            options: {
+              importLoaders: 1
+            }
+          },
+          {
+            loader: "postcss-loader"
+          },
+          {
+            loader: "less-loader",
+            options: {
+              importLoaders: 1,
+              javascriptEnabled: true
+            }
+          }
         ]
       },
       {
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        loader: "babel-loader"
+      },
+      {
         test: /\.(svg|png|jpg|gif)$/,
-        loader: 'url-loader',
+        loader: "url-loader",
         options: {
           limit: 8192,
-          name: 'images/[name].[ext]',
-          outputPath: '../static/',
-          publicPath: '/'
+          name: "img/[name].[ext]",
+          outputPath: htdocsPath,
+          publicPath: "/"
         }
       }
     ]
   },
-  node: {
-    fs: "empty"
-  },
-  resolve: {
-    alias: {
-      '@models': path.resolve(__dirname, '../src/models'),
-      '@routes': path.resolve(__dirname, '../src/routes'),
-      '@pages': path.resolve(__dirname, '../src/pages'),
-      '@components': path.resolve(__dirname, '../src/components'),
-      '@styles': path.resolve(__dirname, '../src/styles'),
-      '@utils': path.resolve(__dirname, '../src/utils'),
-      '@services': path.resolve(__dirname, '../src/services'),
-      '@layouts': path.resolve(__dirname, '../src/layouts'),
-      '@img': path.resolve(__dirname, '../src/img'),
-      '@modals': path.resolve(__dirname, '../src/modals')
-    },
-    extensions: ['.jsx', '.tsx', '.js', '.ts']
-  },
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.ProvidePlugin({
-      React: 'react',
-      ReactDOM: 'react-dom',
-      PropTypes: 'prop-types',
-      dva: 'dva',
-      moment: 'moment'
+      React: "react",
+      ReactDOM: "react-dom",
+      PropTypes: "prop-types",
+      moment: "moment"
     }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../libs'),
-        to: htdocsSrc
-      },
-    ]),
     new webpack.DllReferencePlugin({
-      context: path.resolve(__dirname, '../'),
-      manifest: require('./vendor-manifest.json'),
-      name: 'vendor'
+      context: path.resolve(__dirname, htdocsPath),
+      manifest: require("./vendor-manifest.json"),
+      name: "vendor"
     }),
-    new ProgressBarPlugin(),
-    new HappyPack({
-      loaders: ['babel-loader?cacheDirectory=false']
-    })
-  ]
+    ...htmlPluginArr
+  ],
+  resolve: {
+    alias: {
+      "@models": path.resolve(__dirname, "../src/models"),
+      "@routes": path.resolve(__dirname, "../src/routes"),
+      "@components": path.resolve(__dirname, "../src/components"),
+      "@styles": path.resolve(__dirname, "../src/styles"),
+      "@img": path.resolve(__dirname, "../src/img"),
+      "@api": path.resolve(__dirname, "../src/api"),
+      "@pages": path.resolve(__dirname, "../src/pages"),
+      "@webim": path.resolve(__dirname, "../src/webim"),
+      "@utils": path.resolve(__dirname, "../src/utils")
+    },
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "async",
+      minSize: 3000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 1,
+      maxInitialRequests: 1,
+      automaticNameDelimiter: "~",
+      name: true,
+      cacheGroups: {
+        venders: false,
+        default: false
+      }
+    }
+  }
 };

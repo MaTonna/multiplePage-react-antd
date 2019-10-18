@@ -1,7 +1,5 @@
 import React, { Component, FormEvent, ReactNode } from 'react';
-import ReactDOM from 'react-dom';
 import AddModal from '@components/AddModal';
-import BasicLayout from '@layouts/BasicLayout';
 import { FormComponentProps } from 'antd/lib/form';
 import { Form, Table, Row, Col, Input, Button, Select, DatePicker } from 'antd';
 const FormItem = Form.Item;
@@ -14,7 +12,7 @@ const initialState = {
   paginator: {
     page: 0,
     items: 1,
-    itemsPerPage: parseInt(localStorage.getItem('pageSizeOption')) || 10,
+    itemsPerPage: CONFIG['pagination']['currentPageSize'] || 10,
   },
   isShowAddModal: false
 };
@@ -27,17 +25,14 @@ class DemoPageForm extends Component<FormProps, State> {
 
   columns = [{
     title: '姓名',
-    key: 'name',
     dataIndex: 'name',
   },
   {
     title: '年龄',
-    key: 'age',
     dataIndex: 'age',
   },
   {
     title: '住址',
-    key: 'address',
     dataIndex: 'address',
   }]
 
@@ -91,21 +86,21 @@ class DemoPageForm extends Component<FormProps, State> {
   }
 
   render(): ReactNode {
+    const { columns } = this;
     const { getFieldDecorator } = this.props.form;
     const { dataSource, loading, paginator: { items, page, itemsPerPage }, isShowAddModal } = this.state;
-    const { columns } = this;
-    const { formItemLayout } = CONFIG;
+    const { formItemLayout, timeRanges } = CONFIG;
     return (
-      <BasicLayout>
+      <div className="content-wrap">
         <div className="content-header">
           <Form onSubmit={this.handlerSubmit}>
             <Row type="flex">
-              <Col key="title1">
+              <Col>
                 <FormItem {...formItemLayout} label="输入框">
-                  {getFieldDecorator('title1')(<Input placeholder="" />)}
+                  {getFieldDecorator('title1')(<Input />)}
                 </FormItem>
               </Col>
-              <Col key="title2">
+              <Col>
                 <FormItem {...formItemLayout} label="选择器">
                   {getFieldDecorator('title2')(
                     <Select>
@@ -115,24 +110,24 @@ class DemoPageForm extends Component<FormProps, State> {
                   )}
                 </FormItem>
               </Col>
-              <Col key="title3">
+              <Col>
                 <FormItem {...formItemLayout} label="日期选择框">
-                  {getFieldDecorator('title3')(<RangePicker onChange={null} />)}
+                  {getFieldDecorator('title3')(<RangePicker ranges={timeRanges} className="calendar-picker" />)}
                 </FormItem>
               </Col>
-              <Col key="title4">
+              <Col>
                 <FormItem {...formItemLayout} label="标题4">
-                  {getFieldDecorator('title4')(<Input placeholder="" />)}
+                  {getFieldDecorator('title4')(<Input />)}
                 </FormItem>
               </Col>
-              <Col key="title5">
+              <Col>
                 <FormItem {...formItemLayout} label="标题5">
-                  {getFieldDecorator('title5')(<Input placeholder="" />)}
+                  {getFieldDecorator('title5')(<Input />)}
                 </FormItem>
               </Col>
-              <Col key="title6">
+              <Col>
                 <FormItem {...formItemLayout} label="标题6">
-                  {getFieldDecorator('title6')(<Input placeholder="" />)}
+                  {getFieldDecorator('title6')(<Input />)}
                 </FormItem>
               </Col>
             </Row>
@@ -167,7 +162,7 @@ class DemoPageForm extends Component<FormProps, State> {
                 this.handlePagination(current, size);
               },
               onShowSizeChange: (current: number, size: number) => {
-                localStorage.setItem('pageSizeOption', size.toString())
+                localStorage.setItem('currentPageSize', size.toString())
                 this.handlePagination(current, size);
               },
             }}
@@ -182,10 +177,10 @@ class DemoPageForm extends Component<FormProps, State> {
             })
           }}
         />
-      </BasicLayout >
+      </div>
     )
   }
 }
 
 const DemoPage = Form.create<FormProps>()(DemoPageForm);
-ReactDOM.render(<DemoPage />, document.getElementById('root'));
+export default DemoPage;

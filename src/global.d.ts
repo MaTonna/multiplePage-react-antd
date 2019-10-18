@@ -1,18 +1,22 @@
 interface Window extends Window {
   T: any
+  globHistory: any
+  gotoPage: Function
 }
 declare namespace CONFIG {
   const frontPath: string;
   const resourcePath: string;
   const timeDiff: number;
+  const loginUserLogo: string;
   const username: string;
   const userId: string;
   const authorities: string;
-  const timeRanges: [];
+  let timeRanges: any;
   let normalForm: Function;
   let formItemLayout: {};
   let pagination: {
     pageSizeOptions: Array<string>
+    currentPageSize: number
   };
 }
 

@@ -18,13 +18,15 @@ module.exports = {
     browser: true,
   },
   globals: {
-    antd: true,
-    T: true,
     moment: true,
     PropTypes: true,
     CONFIG: true,
     ReactDOM: true,
     React: true,
+    window: true,
+    require: true,
+    module: true,
+    __dirname: true
   },
   rules: {
     // 'no-unused-vars': 0,
